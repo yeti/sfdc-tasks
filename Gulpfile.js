@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var zip = require('gulp-zip');
 var forceDeploy = require('gulp-jsforce-deploy');
+require('dotenv').config(); // Load .env vars
 
 gulp.task('deploy', function() {
   gulp.src('./package/**/*', { base: "." })

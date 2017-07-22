@@ -16,7 +16,11 @@ module.exports = (conf) => ({
 		]
 	},
 	plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.EnvironmentPlugin(['SF_USERNAME', 'SF_PASSWORD', 'SF_URL']),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"'
+    }),
 	],
 	devtool: 'source-map',
 	devServer: {

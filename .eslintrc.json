@@ -23,7 +23,7 @@
     "no-unreachable": "error",
     "eqeqeq": "warn",
     "react/react-in-jsx-scope": "error",
-    "react/jsx-filename-extension": "warn",
+    "react/jsx-filename-extension": "off",
     "mocha/no-exclusive-tests": "error"
   }
 }

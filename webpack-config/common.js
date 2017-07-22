@@ -62,7 +62,7 @@ module.exports = (conf) => {
         env: process.env,
         appMountId: 'app',
         favicon: './favicon.ico'
-      })
+      }),
     ]
   }
 }
