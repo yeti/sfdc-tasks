@@ -2,10 +2,9 @@
 const SalesforcePackager = require('salesforce-resources-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const PATHS = require('./paths');
-const remoteObject = require('../src/remoteObjects');
 const webpack = require('webpack');
 
-module.exports = (conf) => ({
+module.exports = () => ({
   output: {
     path: PATHS.package,
     publicPath: '',
@@ -15,15 +14,14 @@ module.exports = (conf) => ({
     new CleanPlugin([PATHS.package], { root: process.cwd() }),
     new SalesforcePackager({
       staticresource: {
-        name: 'appBundle'
+        name: 'tasksBundle'
       },
       page: {
-        name: 'App_Page',
+        name: 'Tasks',
         metaTemplateOptions:{
           label: 'Redux Salesforce Starter'
         },
         templateOptions : {
-          remoteObject: remoteObject,
           accessTokenVar: '__ACCESS_TOKEN',
           zipNameVar: '__STATIC_RESOURCE_ZIP'
         }

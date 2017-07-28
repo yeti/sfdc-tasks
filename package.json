@@ -18,18 +18,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/john-benson/react-webpack-redux-starter.git"
+    "url": "git+https://github.com/yeti/sfdc-tasks.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/john-benson/react-webpack-redux-starter/issues"
+    "url": "https://github.com/yeti/sfdc-tasks/issues"
   },
   "engines": {
     "node": ">=4.7.0",
     "npm": ">=4.1.0"
   },
-  "homepage": "https://github.com/john-benson/total-cost-web#readme",
+  "homepage": "https://github.com/yeti/sfdc-tasks#readme",
   "devDependencies": {
     "@kadira/storybook": "~2.35.3",
     "@kadira/storybook-addon-knobs": "~1.7.1",

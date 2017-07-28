@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { loadAccounts } from '../actions'
 import PropTypes from 'prop-types'
-import SfdcConnector from 'sfdc-Connector'
+import SfdcConnector from 'utils/sfdc-Connector'
+import { Icon } from 'react-lightning-design-system'
 
 export class Db extends React.Component {
 
@@ -46,7 +47,14 @@ export class Db extends React.Component {
   }
 
   render() {
-    return null;
+    return <Icon
+      category="standard"
+      size="medium"
+      icon="refresh"
+      textColor={undefined}
+      fillColor={undefined}
+      container={undefined}
+    />;
   }
 }
 

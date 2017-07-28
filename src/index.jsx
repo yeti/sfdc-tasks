@@ -1,13 +1,13 @@
-import './entry.js';
+import App from './app'
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
-import App from 'app';
 import { VERSION, RELEASE } from 'APP_CONFIG';
 
 // this file "kicks off" the application.
 // it's where we define where our application will hook into DOM
 // and what should be used as the root component
+//
 
 const renderApp = (Component) => {
   ReactDOM.render(
