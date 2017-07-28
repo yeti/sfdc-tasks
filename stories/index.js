@@ -7,6 +7,6 @@ configure();
 const storyContextes = require.context('./', true, /.jsx/);
 
 const res = storyContextes.keys().forEach(i => {
-	const res = storyContextes(i);
-	res.default.addDecorator(withKnobs);
+  const res = storyContextes(i);
+  res.default.addDecorator(withKnobs);
 });

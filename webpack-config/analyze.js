@@ -3,7 +3,7 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (conf) => ({
-	plugins: [
+  plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: 'server',
       analyzerPort: 8888,

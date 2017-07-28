@@ -20,6 +20,11 @@ TodoList.propTypes = {
     completed: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired
   }).isRequired).isRequired,
+  records: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    Name: PropTypes.bool.isRequired,
+    attributes: PropTypes.object
+  }).isRequired).isRequired,
   onTodoClick: PropTypes.func.isRequired
 }
 

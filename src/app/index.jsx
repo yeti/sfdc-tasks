@@ -11,7 +11,7 @@ const store = createStore(
 /*eslint-disable */
 console.dir(process.env.NODE_ENV);
 console.dir(process.env.SF_USERNAME);
-console.dir(process.env.SF_PASSWORD);
+//console.dir(process.env.SF_PASSWORD);
 console.dir(process.env.SF_URL);
 console.dir(window['__ACCESS_TOKEN']);
 /*eslint-enable */
