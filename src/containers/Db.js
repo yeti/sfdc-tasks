@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { loadAccounts } from '../actions'
 import PropTypes from 'prop-types'
 import SfdcConnector from 'utils/sfdc-Connector'
-import { Icon } from 'react-lightning-design-system'
+import { Button } from 'react-lightning-design-system'
 
 export class Db extends React.Component {
 
@@ -24,6 +24,10 @@ export class Db extends React.Component {
   }
 
   componentDidMount() {
+    return this.query();
+  }
+
+  query() {
     this.connector.init()
       .then(::this.queryAccounts);
   }
@@ -47,14 +51,20 @@ export class Db extends React.Component {
   }
 
   render() {
-    return <Icon
-      category="standard"
-      size="medium"
-      icon="refresh"
-      textColor={undefined}
-      fillColor={undefined}
-      container={undefined}
-    />;
+    return (
+      <div style={{}}>
+        <Button
+          type="neutral"
+          size={undefined}
+          label="Refresh"
+          icon="refresh"
+          iconAlign="left"
+          iconSize={undefined}
+          disabled={false}
+          onClick={::this.query}
+        />
+        </div>
+      );
   }
 }
 

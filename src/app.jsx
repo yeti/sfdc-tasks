@@ -3,7 +3,7 @@ import React from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
-
+import configure from 'lightning-configuration' // eslint-disable-line
 
 const store = createStore(
   reducer, /* preloadedState, */
