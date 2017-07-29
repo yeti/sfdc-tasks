@@ -3,6 +3,7 @@ const SalesforcePackager = require('salesforce-resources-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const PATHS = require('./paths');
 const webpack = require('webpack');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = () => ({
   output: {
@@ -14,12 +15,12 @@ module.exports = () => ({
     new CleanPlugin([PATHS.package], { root: process.cwd() }),
     new SalesforcePackager({
       staticresource: {
-        name: 'tasksBundle'
+        name: 'tasksTrackerBundle'
       },
       page: {
-        name: 'Tasks',
+        name: 'TaskTracker',
         metaTemplateOptions:{
-          label: 'Redux Salesforce Starter'
+          label: 'Tasks Tracker'
         },
         templateOptions : {
           accessTokenVar: '__ACCESS_TOKEN',
@@ -30,5 +31,6 @@ module.exports = () => ({
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
+    new WebpackNotifierPlugin()
   ]
 });

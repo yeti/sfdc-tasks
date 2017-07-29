@@ -11,7 +11,7 @@ const getVisibleTasks = (tasks, filter) => {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: getVisibleTasks(state.todos, state.visibilityFilter)
+  tasks: getVisibleTasks(state.allTasks, state.visibilityFilter)
 })
 
 const mapDispatchToProps = {}

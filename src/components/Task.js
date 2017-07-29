@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Task = ({ id, Name }) => (
+const Task = ({ Id, Subject }) => (
   <li>
-    {Name} ({id})
+    <a href={`/${Id}`}>
+      {Subject}
+    </a>
   </li>
 )
 
 Task.propTypes = {
-  id: PropTypes.string.isRequired,
-  Name: PropTypes.string.isRequired,
+  Id: PropTypes.string.isRequired,
+  Subject: PropTypes.string.isRequired,
   attributes: PropTypes.object,
 }
 

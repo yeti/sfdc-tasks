@@ -19,3 +19,13 @@ export const loadAccounts = (accounts) => ({
   type: 'LOAD_ACCOUNTS',
   accounts
 })
+
+export const loadAllTasks = (allTasks) => ({
+  type: 'LOAD_ALL_TASKS',
+  allTasks
+})
+
+export const setHasLoaded = (hasLoaded) => ({
+  type: 'SET_HAS_LOADED',
+  hasLoaded
+})

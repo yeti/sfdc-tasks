@@ -3,11 +3,11 @@ import React from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
-import configure from 'lightning-configuration' // eslint-disable-line
+import configure from 'utils/lightning-design-system' // eslint-disable-line
 
 const store = createStore(
-  reducer, /* preloadedState, */
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  reducer,
+  //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 const WrappedApp = () => {

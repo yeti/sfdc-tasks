@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { withKnobs } from '@kadira/storybook-addon-knobs';
-import configure from 'lightning-configuration';
+import configure from 'utils/lightning-design-system';
 configure();
 
 const storyContextes = require.context('./', true, /.jsx/);

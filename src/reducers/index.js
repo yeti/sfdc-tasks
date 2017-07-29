@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
 import visibilityFilter from './visibilityFilter'
 import records from './records'
+import allTasks from './allTasks'
+import hasLoaded from './hasLoaded'
 
-const todoApp = combineReducers({
+const taskTracker = combineReducers({
+  allTasks,
+  hasLoaded,
   records,
-  todos,
   visibilityFilter,
 })
 
-export default todoApp
+export default taskTracker

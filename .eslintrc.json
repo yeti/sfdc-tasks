@@ -21,6 +21,7 @@
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-unreachable": "error",
+    "no-debugger": "warn",
     "eqeqeq": "warn",
     "react/react-in-jsx-scope": "error",
     "react/jsx-filename-extension": "off",
