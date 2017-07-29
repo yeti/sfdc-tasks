@@ -3,8 +3,14 @@ import TaskList from '../components/TaskList'
 
 const getVisibleTasks = (tasks, filter) => {
   switch (filter) {
-    case 'SHOW_ALL':
+    case 'SHOW_ALL_TASKS':
       return tasks
+    case 'SHOW_SALES_QUALIFIED_TASKS':
+      return []
+    case 'SHOW_OPTY_TASKS':
+      return []
+    case 'SHOW_UNTENDED_ACCOUNTS':
+      return []
     default:
       throw new Error('Unknown filter: ' + filter)
   }

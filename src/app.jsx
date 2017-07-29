@@ -7,7 +7,7 @@ import configure from 'utils/lightning-design-system' // eslint-disable-line
 
 const store = createStore(
   reducer,
-  //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 const WrappedApp = () => {
