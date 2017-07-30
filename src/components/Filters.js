@@ -1,26 +1,19 @@
 import React from 'react'
-import FilterOption from '../containers/FilterOption'
-import { DropdownButton } from 'react-lightning-design-system'
+import PropTypes from 'prop-types'
+import { DropdownButton, DropdownMenuItem } from 'react-lightning-design-system'
+import { setVisibilityFilter } from '../actions'
 
-const Filters = () => (
-  <DropdownButton type="icon-more" icon="filterList" menuAlign="right">
-    <FilterOption
-      filter="SHOW_ALL_TASKS"
-      label="All Tasks"
-    />
-    <FilterOption
-      filter="SHOW_SALES_QUALIFIED_TASKS"
-      label="Sales Qualified Taskss"
-    />
-    <FilterOption
-      filter="SHOW_OPTY_TASKS"
-      label="Open Opportunity Tasks"
-    />
-    <FilterOption
-      filter="SHOW_UNTENDED_ACCOUNTS"
-      label="Untended Accounts"
-    />
+const Filters = ( { dispatch }) => (
+  <DropdownButton type="icon-more" icon="filterList" menuAlign="right" onMenuItemClick={(item) => {dispatch(setVisibilityFilter(item.filter))}}>
+    <DropdownMenuItem label="All Tasks" filter="SHOW_ALL_TASKS"/>
+    <DropdownMenuItem label="Sales Qualified Tasks" filter="SHOW_SALES_QUALIFIED_TASKS"/>
+    <DropdownMenuItem label="Open Opportunity Tasks" filter="SHOW_OPTY_TASKS"/>
+    <DropdownMenuItem label="Untended Accounts" filter="SHOW_UNTENDED_ACCOUNTS"/>
   </DropdownButton>
 )
+
+Filters.propTypes = {
+  dispatch: PropTypes.func,
+}
 
 export default Filters

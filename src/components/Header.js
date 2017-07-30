@@ -1,5 +1,5 @@
 import Db from '../containers/Db'
-import Filters from './Filters'
+import FilterManager from '../containers/FilterManager'
 import React from 'react'
 import { PageHeader, PageHeaderHeading } from 'react-lightning-design-system'
 
@@ -12,7 +12,7 @@ const Header = () => {
         info="X items"
         rightActions={[
           <Db key="db"/>,
-          <Filters key="filters"/>
+          <FilterManager key="filters"/>
         ]}
       />
     </PageHeader>
