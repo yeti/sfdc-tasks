@@ -40,7 +40,7 @@ export class Db extends React.Component {
   queryAccounts() {
     return this.connector.query('SELECT Id, Name FROM Account')
       .then((results) => {
-        console.dir('Good job'); // eslint-disable-line
+        console.dir('Accounts'); // eslint-disable-line
         console.dir(results); // eslint-disable-line
         this.props.dispatch(loadAccounts(results.records))
       });
@@ -49,12 +49,14 @@ export class Db extends React.Component {
   queryTasks() {
     return new Promise((resolve, reject) => {
       this.connector.connection.sobject('Task')
-        .select('*, Who.*, What.*')
+        .select('*, Who.*, What.*, Owner.FirstName')
         .where(`Status = 'Open'`)
         .execute(function(err, results) {
           if (err) {
             reject(err);
           }
+          console.dir('Tasks'); // eslint-disable-line
+          console.dir(results); // eslint-disable-line
           resolve(results);
         })
     }).then(allTasks => {

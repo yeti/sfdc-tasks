@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import TaskList from '../components/TaskList'
 
 const getVisibleTasks = (tasks, filter) => {
-  switch (filter) {
+  switch (filter.filter) {
     case 'SHOW_ALL_TASKS':
       return tasks
     case 'SHOW_SALES_QUALIFIED_TASKS':
@@ -17,7 +17,8 @@ const getVisibleTasks = (tasks, filter) => {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: getVisibleTasks(state.allTasks, state.visibilityFilter)
+  tasks: getVisibleTasks(state.allTasks, state.visibilityFilter),
+  visibilityFilter: state.visibilityFilter,
 })
 
 const mapDispatchToProps = {}

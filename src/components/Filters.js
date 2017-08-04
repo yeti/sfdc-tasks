@@ -3,12 +3,28 @@ import PropTypes from 'prop-types'
 import { DropdownButton, DropdownMenuItem } from 'react-lightning-design-system'
 import { setVisibilityFilter } from '../actions'
 
+export const filterList = [
+  {
+    label: 'All Tasks',
+    filter: 'SHOW_ALL_TASKS',
+  },
+  {
+    label: 'Sales Qualified Tasks',
+    filter: 'SHOW_SALES_QUALIFIED_TASKS',
+  },
+  {
+    label: 'Open Opportunity Tasks',
+    filter: 'SHOW_OPTY_TASKS',
+  },
+  {
+    label: 'Untended Accounts',
+    filter: 'SHOW_UNTENDED_ACCOUNTS',
+  },
+];
+
 const Filters = ( { dispatch }) => (
   <DropdownButton type="icon-more" icon="filterList" menuAlign="right" onMenuItemClick={(item) => {dispatch(setVisibilityFilter(item.filter))}}>
-    <DropdownMenuItem label="All Tasks" filter="SHOW_ALL_TASKS"/>
-    <DropdownMenuItem label="Sales Qualified Tasks" filter="SHOW_SALES_QUALIFIED_TASKS"/>
-    <DropdownMenuItem label="Open Opportunity Tasks" filter="SHOW_OPTY_TASKS"/>
-    <DropdownMenuItem label="Untended Accounts" filter="SHOW_UNTENDED_ACCOUNTS"/>
+    {filterList.map(filter => <DropdownMenuItem label={filter.label} filter={filter} key={filter.filter}/>)}
   </DropdownButton>
 )
 

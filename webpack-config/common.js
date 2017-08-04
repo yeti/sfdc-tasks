@@ -57,6 +57,7 @@ module.exports = (conf) => {
     plugins: [
       new webpack.NamedModulesPlugin(),
       new HtmlWebpackPlugin({
+        title: 'Task Tracker',
         template: 'node_modules/html-webpack-template/index.ejs',
         inject: false,
         env: process.env,
