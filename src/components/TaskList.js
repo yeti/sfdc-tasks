@@ -10,8 +10,10 @@ const TaskList = ({ tasks, visibilityFilter }) => (
     <ul className="TaskList">
       {tasks.map(task =>
         <Task
-          key={task.Id}
-          {...task}
+          key={task.id}
+          id={task.id}
+          name={task.name}
+          related={task.relatedRecord}
         />
       )}
     </ul>

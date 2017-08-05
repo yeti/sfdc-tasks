@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import TaskList from '../components/TaskList'
+import TaskWrapper from '../utils/TaskWrapper'
 
 const getVisibleTasks = (tasks, filter) => {
   switch (filter.filter) {
@@ -17,7 +18,8 @@ const getVisibleTasks = (tasks, filter) => {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: getVisibleTasks(state.allTasks, state.visibilityFilter),
+  tasks: getVisibleTasks(state.allTasks, state.visibilityFilter)
+    .map(task => new TaskWrapper(task)),
   visibilityFilter: state.visibilityFilter,
 })
 
