@@ -25,7 +25,17 @@ export const loadAllTasks = (allTasks) => ({
   allTasks
 })
 
+export const loadAllUsers = (allUsers) => ({
+  type: 'LOAD_ALL_USERS',
+  allUsers
+})
+
 export const setHasLoaded = (hasLoaded) => ({
   type: 'SET_HAS_LOADED',
   hasLoaded
+})
+
+export const setHasErrored = (hasErrored) => ({
+  type: 'SET_HAS_ERRORED',
+  hasErrored
 })

@@ -61,7 +61,7 @@ This will run a production build and deploy it to your SFDC sandbox/dev org. Onc
 
 ### Deploying to production
 
-SFDC doesn't let you deploy straight to production. Instead, you have to deploy to a sandbox, and deploy to production from there via a outbound changeset:
+SFDC doesn't let you deploy straight to production. Instead, you have to deploy to a sandbox, and deploy to production from there via an outbound changeset:
 
   * Create outbound changeset in sandbox
   * Add components (resource bundle, visualforce page)

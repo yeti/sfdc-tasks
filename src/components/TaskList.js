@@ -13,6 +13,8 @@ const TaskList = ({ tasks, visibilityFilter }) => (
           key={task.id}
           id={task.id}
           name={task.name}
+          dueDate={task.dueDate}
+          owner={task.owner}
           related={task.relatedRecord}
         />
       )}

@@ -1,17 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Tile from './Tile'
+import Avatar from './Avatar'
+import DueDate from './DueDate'
+import './Task.scss';
 
-const Task = ({ id, name, related }) => (
+const Task = ({ id, name, related, owner, dueDate }) => (
   <li>
     <article className="Task slds-card">
       <div className="slds-card__header slds-grid">
         <header className="slds-media slds-media_center slds-has-flexi-truncate">
           <div className="slds-media__body">
             <h2>
-              <a href={`/${id}`} className="slds-card__header-link slds-truncate" title="[object Object]">
+              <span className="slds-m-right_small">
+                <Avatar user={owner} />
+              </span>
+              <a href={`/${id}`} className="slds-card__header-link slds-truncate" title={name}>
                 <span className="slds-text-heading_small">{name}</span>
               </a>
+              <span className="slds-p-top_small">
+                <span className="slds-float_right">
+                  <DueDate dateString={dueDate.formattedDate} isPast={dueDate.isPast}/>
+                </span>
+              </span>
             </h2>
           </div>
         </header>
@@ -31,8 +42,10 @@ const Task = ({ id, name, related }) => (
 
 Task.propTypes = {
   id: PropTypes.string.isRequired,
+  dueDate: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   related: PropTypes.object,
+  owner: PropTypes.object.isRequired,
 }
 
 export default Task
