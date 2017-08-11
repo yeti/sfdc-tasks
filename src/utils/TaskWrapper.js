@@ -136,7 +136,11 @@ class DateWrapper {
   }
 
   get year() {
-    return this.date.getYear();
+    return this.date.getFullYear()
+      .toString()
+      .split('')
+      .splice(2)
+      .join(''); // There's gotta be a better way to fuckin do this
   }
 
   get formattedDate() {

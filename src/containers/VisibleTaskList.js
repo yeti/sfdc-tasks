@@ -1,8 +1,7 @@
 import { connect } from 'react-redux'
 import TaskList from '../components/TaskList'
 import TaskWrapper from '../utils/TaskWrapper'
-
-/* eslint-disable */
+import _ from 'lodash'
 
 const findUser = (users, id) => {
   return users.find(user => user.Id === id)
@@ -16,10 +15,17 @@ const attachUsers = (tasks, users) => {
   return tasks;
 };
 
+const setupTasks = (tasks, users, sort) => {
+  const augmentedUsers = attachUsers(tasks, users)
+    .map(task => new TaskWrapper(task));
+
+  return _.sortBy(augmentedUsers, sort);
+};
+
 const getVisibleTasks = (tasks, filter, users) => {
   switch (filter.filter) {
     case 'SHOW_ALL_TASKS':
-      return attachUsers(tasks, users);
+      return setupTasks(tasks, users, 'owner.name');
     case 'SHOW_SALES_QUALIFIED_TASKS':
       return []
     case 'SHOW_OPTY_TASKS':
@@ -32,8 +38,7 @@ const getVisibleTasks = (tasks, filter, users) => {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: getVisibleTasks(state.allTasks, state.visibilityFilter, state.allUsers)
-    .map(task => new TaskWrapper(task)),
+  tasks: _.sortBy(getVisibleTasks(state.allTasks, state.visibilityFilter, state.allUsers), 'owner.name'),
   visibilityFilter: state.visibilityFilter,
 })
 
