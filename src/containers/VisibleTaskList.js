@@ -25,7 +25,7 @@ const setupTasks = (tasks, users, sort) => {
 const getVisibleTasks = (tasks, filter, users) => {
   switch (filter.filter) {
     case 'SHOW_ALL_TASKS':
-      return setupTasks(tasks, users, 'owner.name');
+      return setupTasks(tasks, users, ['owner.name', 'dueDate.date']);
     case 'SHOW_SALES_QUALIFIED_TASKS':
       return []
     case 'SHOW_OPTY_TASKS':
