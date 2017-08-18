@@ -1,29 +1,31 @@
+import _ from 'lodash'
+
 export default class TaskWrapper {
   constructor(data) {
     this._cache = { data };
   }
 
   get data() {
-    return this._cache.data;
+    return _.get(this._cache, 'data', {});
   }
 
   get id() {
-    return this.data.Id;
+    return _.get(this.data, 'Id', '');
   }
 
   get name() {
-    return this.data.Subject;
+    return _.get(this.data, 'Subject', '');
   }
 
   get dueDate() {
     if (!this._cache.dueDate) {
-      this._cache.dueDate = new DateWrapper(this.data.ActivityDate);
+      this._cache.dueDate = new DateWrapper(_.get(this.data, 'ActivityDate', null));
     }
     return this._cache.dueDate;
   }
 
   get related() {
-    return this.data.What || this.data.Who;
+    return _.get(this.data, 'What') || _.get(this.data, 'Who');
   }
 
   get relatedRecord() {
@@ -35,11 +37,10 @@ export default class TaskWrapper {
 
   get owner() {
     if (!this._cache.owner) {
-      this._cache.owner = new OwnerWrapper(this.data.Owner);
+      this._cache.owner = new OwnerWrapper(_.get(this.data, 'Owner'));
     }
     return this._cache.owner;
   }
-
 }
 
 export class RelatedRecordWrapper {
@@ -90,19 +91,19 @@ export class OwnerWrapper {
   }
 
   get data() {
-    return this._cache.data;
+    return _.get(this._cache, 'data', '');
   }
 
   get firstName() {
-    return this.data.FirstName;
+    return _.get(this.data, 'FirstName', '');
   }
 
   get name() {
-    return this.data.Name;
+    return _.get(this.data, 'Name', '');
   }
 
   get picture() {
-    return this.data.SmallPhotoUrl;
+    return _.get(this.data, 'SmallPhotoUrl', '');
   }
 
   get pictureMissing() {
@@ -116,7 +117,7 @@ export class OwnerWrapper {
   }
 
   get id() {
-    return this.data.Id;
+    return _.get(this.data, 'Id', '');
   }
 }
 
@@ -135,7 +136,8 @@ export class DateWrapper {
 
   get date() {
     if (!this._cache.date) {
-      this._cache.date = new Date(this.data);
+      // This is a shit hack to make sure missing dates get sorted last :(
+      this._cache.date = this.isMissing ? new Date('2999-01-01') : new Date(this.data);
     }
     return this._cache.date;
   }

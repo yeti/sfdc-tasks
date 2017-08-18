@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { loadAccounts, loadAllTasks, loadQualifiedTasks, loadAllUsers, setHasLoaded, setHasErrored } from '../actions'
+import { loadAccounts, loadAllTasks, loadQualifiedTasks, loadOpenOptyTasks, loadAllUsers, setHasLoaded, setHasErrored } from '../actions'
 import PropTypes from 'prop-types'
 import SfdcConnector from 'utils/sfdc-Connector'
 import { Button } from 'react-lightning-design-system'
@@ -20,7 +20,9 @@ export class Db extends React.Component {
       CONTACTS_QUALIFIED: 'QualifiedContacts',
       LEADS_QUALIFIED: 'QualifiedLeads',
       TASKS_QUALIFIED: 'QualifiedTasks',
+      TASKS_OPEN_OPTY: 'OpenOptyTasks',
       OPPORTUNITIES_QUALIFIED: 'QualifiedOpportunities',
+      OPPORTUNITIES_OPEN: 'OpenOpportunities',
       TASKS: 'Tasks',
       OPPORTUNITIES: 'Opportunities',
     };
@@ -50,6 +52,7 @@ export class Db extends React.Component {
         this.queryUsers(),
         this.queryQualifiedTasks(),
         this.queryAllTasks(),
+        this.queryOpenOptyTasks(),
       ]))
       .then(() => {
         this.props.dispatch(setHasLoaded(true));
@@ -85,13 +88,32 @@ export class Db extends React.Component {
             const whatIds = _.concat(qualifiedAccountIds, qualifiedOpportunityIds);
 
             // Now look for tasks related to all the records queried above
-            this.queryTasksByRelated(whoIds, whatIds)
+            this.queryTasksByRelated(whoIds, whatIds, Db.KEYS.TASKS_QUALIFIED)
               .then(qualifiedTasks => {
                 this.props.dispatch(loadQualifiedTasks(qualifiedTasks));
                 resolve(qualifiedTasks);
               });
           });
       })
+    });
+  }
+
+  // Query Tasks:
+  //   - related to Open Opportunities
+  queryOpenOptyTasks() {
+    return new Promise((resolve) => {
+      // Find open opties
+      this.queryOpenOpportunities()
+        .then(openOpportunities => {
+          const openOpportunityIds = _.map(openOpportunities, 'Id');
+
+          // Now look for tasks related to all the records queried above
+          this.queryTasksByRelated([], openOpportunityIds, Db.KEYS.TASKS_OPEN_OPTY)
+            .then(openOptyTasks => {
+              this.props.dispatch(loadOpenOptyTasks(openOptyTasks));
+              resolve(openOptyTasks);
+            });
+          });
     });
   }
 
@@ -120,7 +142,7 @@ export class Db extends React.Component {
     });
   }
 
-  queryTasksByRelated(whoIdList, whatIdList) {
+  queryTasksByRelated(whoIdList, whatIdList, DBKey) {
     return new Promise((resolve, reject) => {
       this.connector.connection.sobject('Task')
         .find({
@@ -130,7 +152,7 @@ export class Db extends React.Component {
           ],
         }, '*, Who.*, What.*')
         .execute((err, results) =>
-          this.handleResponse(err, results, resolve, reject, Db.KEYS.TASKS_QUALIFIED)
+          this.handleResponse(err, results, resolve, reject, DBKey)
         );
     });
   }
@@ -155,6 +177,17 @@ export class Db extends React.Component {
         .where(`Contact_Status__c = 'Sales Qualified Lead'`)
         .execute((err, results) =>
           this.handleResponse(err, results, resolve, reject, Db.KEYS.CONTACTS_QUALIFIED)
+        );
+    });
+  }
+
+  queryOpenOpportunities() {
+    return new Promise((resolve, reject) => {
+      this.connector.connection.sobject('Opportunity')
+        .select('*')
+        .where('IsClosed = FALSE')
+        .execute((err, results) =>
+          this.handleResponse(err, results, resolve, reject, Db.KEYS.OPPORTUNITIES_OPEN)
         );
     });
   }
