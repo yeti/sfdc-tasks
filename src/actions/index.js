@@ -30,6 +30,11 @@ export const loadQualifiedTasks = (qualifiedTasks) => ({
   qualifiedTasks
 })
 
+export const loadOpenOptyTasks = (openOptyTasks) => ({
+  type: 'LOAD_OPEN_OPTY_TASKS',
+  openOptyTasks
+})
+
 export const loadAllUsers = (allUsers) => ({
   type: 'LOAD_ALL_USERS',
   allUsers
