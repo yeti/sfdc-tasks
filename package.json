@@ -1,6 +1,6 @@
 {
   "name": "sfdc-tasks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React app for displaying tasks in SFDC",
   "main": "src/index.jsx",
   "scripts": {
