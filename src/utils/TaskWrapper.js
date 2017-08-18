@@ -105,6 +105,10 @@ class OwnerWrapper {
     return this.data.SmallPhotoUrl;
   }
 
+  get pictureMissing() {
+    return !this.picture || this.data.SmallPhotoUrl.includes('/profilephoto/005');
+  }
+
   get initials() {
     return this.name.split(' ')
       .map(word => word.length && word[0].toUpperCase())
