@@ -133,7 +133,7 @@ export class Db extends React.Component {
     return new Promise((resolve, reject) => {
       this.connector.connection.sobject('Task')
         .select('*, Who.*, What.*')
-        .where(`Status = 'Open'`)
+        .where('IsClosed = FALSE')
         .execute((err, results) =>
           this.handleResponse(err, results, resolve, reject, Db.KEYS.TASKS)
         );
@@ -152,6 +152,7 @@ export class Db extends React.Component {
           return new Promise((resolve, reject) => {
             this.connector.connection.sobject('Task')
               .find({
+                IsClosed: false,
                 WhoId: {
                   $in: whoIdListChunk
                 }
@@ -170,6 +171,7 @@ export class Db extends React.Component {
           return new Promise((resolve, reject) => {
             this.connector.connection.sobject('Task')
               .find({
+                IsClosed: false,
                 WhatId: {
                   $in: whatIdListChunk
                 }
