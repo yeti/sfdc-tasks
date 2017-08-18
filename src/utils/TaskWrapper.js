@@ -42,7 +42,7 @@ export default class TaskWrapper {
 
 }
 
-class RelatedRecordWrapper {
+export class RelatedRecordWrapper {
   constructor(data) {
     this._cache = { data };
   }
@@ -84,7 +84,7 @@ class RelatedRecordWrapper {
   }
 }
 
-class OwnerWrapper {
+export class OwnerWrapper {
   constructor(data) {
     this._cache = { data };
   }
@@ -120,7 +120,7 @@ class OwnerWrapper {
   }
 }
 
-class DateWrapper {
+export class DateWrapper {
   constructor(data) {
     this._cache = { data };
   }
