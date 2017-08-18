@@ -8,7 +8,7 @@ export const filterList = [
     label: 'All Tasks',
     filter: 'SHOW_ALL_TASKS',
   },
-  /*{
+  {
     label: 'Sales Qualified Tasks',
     filter: 'SHOW_SALES_QUALIFIED_TASKS',
   },
@@ -16,7 +16,7 @@ export const filterList = [
     label: 'Open Opportunity Tasks',
     filter: 'SHOW_OPTY_TASKS',
   },
-  {
+  /*{
     label: 'Untended Accounts',
     filter: 'SHOW_UNTENDED_ACCOUNTS',
   },*/

@@ -15,21 +15,19 @@ const attachUsers = (tasks, users) => {
   return tasks;
 };
 
-const setupTasks = (tasks, users, sort) => {
-  const augmentedUsers = attachUsers(tasks, users)
+const setupTasks = (tasks, users) => {
+  return attachUsers(tasks, users)
     .map(task => new TaskWrapper(task));
-
-  return _.sortBy(augmentedUsers, sort);
 };
 
-const getVisibleTasks = (tasks, filter, users) => {
+const getVisibleTasks = (state, filter, users) => {
   switch (filter.filter) {
     case 'SHOW_ALL_TASKS':
-      return setupTasks(tasks, users, ['owner.name', 'dueDate.date']);
+      return setupTasks(state.allTasks, users);
     case 'SHOW_SALES_QUALIFIED_TASKS':
-      return []
+      return setupTasks(state.qualifiedTasks, users);
     case 'SHOW_OPTY_TASKS':
-      return []
+      return setupTasks(state.openOptyTasks, users);
     case 'SHOW_UNTENDED_ACCOUNTS':
       return []
     default:
@@ -38,7 +36,9 @@ const getVisibleTasks = (tasks, filter, users) => {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: _.sortBy(getVisibleTasks(state.allTasks, state.visibilityFilter, state.allUsers), 'owner.name'),
+  tasks: _(getVisibleTasks(state, state.visibilityFilter, state.allUsers))
+    .orderBy(['owner.name', 'dueDate.date'], ['asc', 'asc'])
+    .value(),
   visibilityFilter: state.visibilityFilter,
 })
 
