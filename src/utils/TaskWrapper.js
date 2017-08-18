@@ -118,12 +118,21 @@ class OwnerWrapper {
 
 class DateWrapper {
   constructor(data) {
-    this._cache = {
-      date: new Date(data),
-    };
+    this._cache = { data };
+  }
+
+  get data() {
+    return this._cache.data;
+  }
+
+  get isMissing() {
+    return !this.data;
   }
 
   get date() {
+    if (!this._cache.date) {
+      this._cache.date = new Date(this.data);
+    }
     return this._cache.date;
   }
 
@@ -144,7 +153,7 @@ class DateWrapper {
   }
 
   get formattedDate() {
-    return `${this.month}/${this.day}/${this.year}`;
+    return this.isMissing ? '' : `${this.month}/${this.day}/${this.year}`;
   }
 
   get isPast() {
