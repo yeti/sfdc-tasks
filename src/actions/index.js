@@ -25,6 +25,11 @@ export const loadAllTasks = (allTasks) => ({
   allTasks
 })
 
+export const loadQualifiedTasks = (qualifiedTasks) => ({
+  type: 'LOAD_QUALIFIED_TASKS',
+  qualifiedTasks
+})
+
 export const loadAllUsers = (allUsers) => ({
   type: 'LOAD_ALL_USERS',
   allUsers

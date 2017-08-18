@@ -22,12 +22,12 @@ const setupTasks = (tasks, users, sort) => {
   return _.sortBy(augmentedUsers, sort);
 };
 
-const getVisibleTasks = (tasks, filter, users) => {
+const getVisibleTasks = (state, filter, users) => {
   switch (filter.filter) {
     case 'SHOW_ALL_TASKS':
-      return setupTasks(tasks, users, ['owner.name', 'dueDate.date']);
+      return setupTasks(state.allTasks, users, ['owner.name', 'dueDate.date']);
     case 'SHOW_SALES_QUALIFIED_TASKS':
-      return []
+      return setupTasks(state.qualifiedTasks, users, ['owner.name', 'dueDate.date']);
     case 'SHOW_OPTY_TASKS':
       return []
     case 'SHOW_UNTENDED_ACCOUNTS':
@@ -38,7 +38,7 @@ const getVisibleTasks = (tasks, filter, users) => {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: _.sortBy(getVisibleTasks(state.allTasks, state.visibilityFilter, state.allUsers), 'owner.name'),
+  tasks: getVisibleTasks(state, state.visibilityFilter, state.allUsers),
   visibilityFilter: state.visibilityFilter,
 })
 

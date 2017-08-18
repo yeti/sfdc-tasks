@@ -8,11 +8,11 @@ export const filterList = [
     label: 'All Tasks',
     filter: 'SHOW_ALL_TASKS',
   },
-  /*{
+  {
     label: 'Sales Qualified Tasks',
     filter: 'SHOW_SALES_QUALIFIED_TASKS',
   },
-  {
+  /*{
     label: 'Open Opportunity Tasks',
     filter: 'SHOW_OPTY_TASKS',
   },
