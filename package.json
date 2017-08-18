@@ -1,7 +1,7 @@
 {
-  "name": "incap-getsurvey-app",
+  "name": "sfdc-tasks",
   "version": "1.0.0",
-  "description": "Single Page application for Incap Get Survey",
+  "description": "React app for displaying tasks in SFDC",
   "main": "src/index.jsx",
   "scripts": {
     "start": "webpack-dev-server --env.env development",
