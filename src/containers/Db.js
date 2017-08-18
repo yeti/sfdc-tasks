@@ -143,17 +143,51 @@ export class Db extends React.Component {
   }
 
   queryTasksByRelated(whoIdList, whatIdList, DBKey) {
-    return new Promise((resolve, reject) => {
-      this.connector.connection.sobject('Task')
-        .find({
-          $or: [
-            { WhoId: { $in: whoIdList } },
-            { WhatId: { $in: whatIdList } },
-          ],
-        }, '*, Who.*, What.*')
-        .execute((err, results) =>
-          this.handleResponse(err, results, resolve, reject, DBKey)
-        );
+    const MAX_SIZE = 100;
+    // WTF is going on here? Because we are sending GET requests with too many chars, we need to chunk requests with no more than 200 records at a time and concatenate the results
+    return Promise.all([
+      ..._(whoIdList)
+        .chunk(MAX_SIZE)
+        .map((whoIdListChunk) => {
+          return new Promise((resolve, reject) => {
+            this.connector.connection.sobject('Task')
+              .find({
+                WhoId: {
+                  $in: whoIdListChunk
+                }
+              }, '*, Who.*')
+              .execute((err, results) => {
+                if (err) {
+                  reject(err);
+                }
+                resolve(results);
+              });
+          });
+        }),
+      ..._(whatIdList)
+        .chunk(MAX_SIZE)
+        .map((whatIdListChunk) => {
+          return new Promise((resolve, reject) => {
+            this.connector.connection.sobject('Task')
+              .find({
+                WhatId: {
+                  $in: whatIdListChunk
+                }
+              }, '*, What.*')
+              .execute((err, results) => {
+                if (err) {
+                  reject(err);
+                }
+                resolve(results);
+              });
+          });
+        }),
+    ]).then(results => {
+      const concatenatedResults = _.concat([], ...results);
+      console.dir(DBKey) //eslint-disable-line
+      console.dir(concatenatedResults) //eslint-disable-line
+      this.cacheRecords(DBKey, concatenatedResults);
+      return concatenatedResults;
     });
   }
 
